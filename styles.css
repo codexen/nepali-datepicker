@@ -1,0 +1,66 @@
+.xen-card {
+	position: absolute;
+	display: none;
+	width: 300px;
+	background: #fff;
+	box-shadow: 0px 0px 10px -3px grey;
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+.xen-cell {
+	cursor: pointer;
+}
+
+.xen-cell:hover {
+	background: #00968873;
+}
+
+.xen-cell.bg-info {
+	color: #FFF;
+}
+
+table.xen-calendar-table {
+	width: 100%;
+	border-collapse: collapse;
+	border-color: #ccc;
+}
+
+table.xen-calendar-table, .xen-calendar-table th, .xen-calendar-table  td {
+	padding: 5px 5px;
+	font-size: 13px;
+}
+
+.xen-calendar-table th {
+	width: 30px;
+	font-weight: normal;
+}
+
+.xen-prev-next-btn {
+	float: right;
+}
+
+.xen-prev-next-btn button {
+	padding: 0;
+}
+
+.xen-form-inline {
+	float: left;
+}
+
+.xen-bg-info {
+	background: #009688;
+	color: #FFFFFF;
+}
+
+.xen-calendar-table {
+	padding-top: 5px;
+}
+
+table.xen-calendar-table {
+	margin-top: 25px;
+}
+
+.xen-btn-prev {
+	margin-right: 3px;
+}

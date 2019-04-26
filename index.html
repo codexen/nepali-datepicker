@@ -9,11 +9,19 @@
 </head>
 <body class="container">
 	
-	<input type="text" class="form-control xen-datepicker">
+	<div class="form-group">
+		<input type="text" class="form-control xen-one">
+	</div>
+	<div class="form-group">
+		<input type="text" class="form-control xen-two">
+	</div>
+
 	
-	<script src="./scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="./jquery.nepdatepicker.js"></script>
 	<script>
-		init('.xen-datepicker')
+		$('.xen-one').nepdatepicker();
+		$('.xen-two').nepdatepicker();
 	</script>
 </body>
 </html>

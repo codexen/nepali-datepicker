@@ -1,8 +1,9 @@
 today = new Date();
 currentMonth = today.getMonth();
 currentYear = today.getFullYear();
-currentMonth = 11;
-currentYear = 2075;
+
+currentMonth = 6;
+currentYear = 2076;
 
 months = ["Baishak", "Jestha", "Ashad", "Shrawn", "Bhadra", "Ashwin", "kartik", "Mangshir", "Poush", "Magh", "Falgun", "Chaitra"];
 nepali_dates = {
@@ -99,76 +100,6 @@ nepali_dates = {
 	2090:[[30,32,31,32,31,30,30,30,29,30,30,30],[5,7,4,7,4,7,2,4,6,7,2,4]],
 };
 
-function next() {
-	currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
-	currentMonth = (currentMonth + 1) % 12;
-	showCalendar(currentMonth, currentYear);
-}
-
-function previous() {
-	currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-	currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-	showCalendar(currentMonth, currentYear);
-}
-
-function jump() {
-	currentYear = parseInt(selectYear.value);
-	currentMonth = parseInt(selectMonth.value);
-	showCalendar(currentMonth, currentYear);
-}
-
-function showCalendar(month, year) {
-
-    // let firstDay = (new Date(year, month)).getDay();
-    let firstDay = nepali_dates[year][1][month] - 1;
-
-    // tbl = document.querySelector(".calendar-body"); // body of the calendar
-    tbl = $(".calendar-body")
-    // clearing all previous cells
-    tbl.html('');
-
-    // filing data about month and in the page via DOM.
-    selectYear.value = year;
-    selectMonth.value = month;
-
-	// creating all cells
-	tbl.each(function () {
-		let date = 1;
-		for (let i = 0; i < 6; i++) {
-		// creates a table row
-		let row = document.createElement("tr");
-
-		//creating individual cells, filing them up with data.
-		for (let j = 0; j < 7; j++) {
-			if (i === 0 && j < firstDay) {
-				cell = document.createElement("td");
-				cellText = document.createTextNode("");
-				cell.appendChild(cellText);
-				row.appendChild(cell);
-			}
-			else if (date > daysInMonth(month, year)) {
-				break;
-			}
-
-			else {
-				cell = document.createElement("td");
-				if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-					cell.classList.add("bg-info");
-				} // color today's date
-				cell.classList.add("xen-cell");
-				var nepaliDate = unicodeText(date);
-				cellText = document.createTextNode(nepaliDate);
-				cell.appendChild(cellText);
-				row.appendChild(cell);
-				date++;
-			}
-		}
-
-		this.appendChild(row); // appending each row into calendar body.
-		}
-	})
-}
-
 function daysInMonth(iMonth, iYear) {
 	return nepali_dates[iYear][0][iMonth];
 }
@@ -200,7 +131,9 @@ let calendars = [];
 
 (function( $ ){
 	$.fn.nepdatepicker = function() {
-		init(this);
+		for(var i = 0; i< this.length; i++) {
+			init($(this[i]));
+		}
 
 		return this;
 	}; 
@@ -208,12 +141,101 @@ let calendars = [];
 
 function init(input) {
 	input.addClass('xen-calendar');
-	input.after('<div class="xen-card"><div class="xen-card-header"><div class="xen-form-wrapper"><form class="xen-form-inline"><select class="" name="month" id="month" onchange="jump()"><option value=0>बैशाख</option><option value=1>जेठ</option><option value=2>असार</option><option value=3>श्रावण</option><option value=4>भदौ</option><option value=5>आश्विन</option><option value=6>कार्तिक</option><option value=7>मंसिर</option><option value=8>पुष</option><option value=9>माघ</option><option value=10>फाल्गुन</option><option value=11>चैत्र</option></select><label for="year"></label><select class="col-sm-6" name="year" id="year" onchange="jump()"><option value=2000>2000</option><option value=2001>2001</option><option value=2002>2002</option><option value=2003>2003</option><option value=2004>2004</option><option value=2005>2005</option><option value=2006>2006</option><option value=2007>2007</option><option value=2008>2008</option><option value=2009>2009</option><option value=2010>2010</option><option value=2011>2011</option><option value=2012>2012</option><option value=2013>2013</option><option value=2014>2014</option><option value=2015>2015</option><option value=2016>2016</option><option value=2017>2017</option><option value=2018>2018</option><option value=2019>2019</option><option value=2020>2020</option><option value=2021>2021</option><option value=2022>2022</option><option value=2023>2023</option><option value=2024>2024</option><option value=2025>2025</option><option value=2026>2026</option><option value=2027>2027</option><option value=2028>2028</option><option value=2029>2029</option><option value=2030>2030</option><option value=2075>2075</option><option value=2076>2076</option><option value=2077>2077</option></select></form><div class="xen-prev-next-btn"><button class="xen-btn-prev" id="previous" onclick="previous()">Prev</button><button class="xen-btn" id="next" onclick="next()">Next</button></div></div></div><table border="1" class="xen-calendar-table" id="calendar"><thead><tr><th>आइत</th><th>सोम</th><th>मङ्गल</th><th>बुध</th><th>बिहि</th><th>शुक्र</th><th>शनि</th></tr></thead><tbody class="calendar-body"></tbody></table></div>');
-	selectYear = document.getElementById("year");
-	selectMonth = document.getElementById("month");
-	calendars.push(input);
+	var appendData = '<div class="xen-card"><div class="xen-card-header"><div class="xen-form-wrapper"><form class="xen-form-inline"><select class="xen-calendar-month" name="month" id="month" onchange="jump(this)"><option value=0>बैशाख</option><option value=1>जेठ</option><option value=2>असार</option><option value=3>श्रावण</option><option value=4>भदौ</option><option value=5>आश्विन</option><option value=6>कार्तिक</option><option value=7>मंसिर</option><option value=8>पुष</option><option value=9>माघ</option><option value=10>फाल्गुन</option><option value=11>चैत्र</option></select><label for="year"></label><select class="col-sm-6 xen-calendar-year" name="year" id="year" onchange="jump(this)">';
+	for (var i = 2000; i < 2091; i++) {
+		appendData+= '<option value="'+ i +'">'+i+'</option>';
+	}
+	appendData+= '</select></form><div class="xen-prev-next-btn"><button class="xen-btn-prev" id="previous" onclick="previous(this)">Prev</button><button class="xen-btn" id="next" onclick="next(this)">Next</button></div></div></div><table border="1" class="xen-calendar-table" id="calendar"><thead><tr><th>आइत</th><th>सोम</th><th>मङ्गल</th><th>बुध</th><th>बिहि</th><th>शुक्र</th><th>शनि</th></tr></thead><tbody class="calendar-body"></tbody></table></div>';
+	input.after(appendData);
 
-	showCalendar(currentMonth, currentYear);
+	showCalendar(input, currentMonth, currentYear);
+}
+
+function showCalendar(input, month, year) {
+	// let firstDay = (new Date(year, month)).getDay();
+	let firstDay = nepali_dates[year][1][month] - 1;
+
+    // tbl = document.querySelector(".calendar-body"); // body of the calendar
+    tbl = input.next('.xen-card').find(".calendar-body")
+    // clearing all previous cells
+    tbl.html('');
+
+    // filing data about month and in the page via DOM.
+    var selectYear = input.next('.xen-card').find('.xen-calendar-year');
+	var selectMonth = input.next('.xen-card').find('.xen-calendar-month');
+
+	selectYear.val(year);
+    selectMonth.val(month);
+
+	// creating all cells
+	tbl.each(function () {
+		let date = 1;
+		for (let i = 0; i < 6; i++) {
+			// creates a table row
+			let row = document.createElement("tr");
+
+			//creating individual cells, filing them up with data.
+			for (let j = 0; j < 7; j++) {
+				if (i === 0 && j < firstDay) {
+					cell = document.createElement("td");
+					cellText = document.createTextNode("");
+					cell.appendChild(cellText);
+					row.appendChild(cell);
+				}
+				else if (date > daysInMonth(month, year)) {
+					break;
+				}
+
+				else {
+					cell = document.createElement("td");
+					if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
+						cell.classList.add("bg-info");
+					} // color today's date
+					cell.classList.add("xen-cell");
+					var nepaliDate = unicodeText(date);
+					cellText = document.createTextNode(nepaliDate);
+					cell.appendChild(cellText);
+					row.appendChild(cell);
+					date++;
+				}
+			}
+
+			this.appendChild(row); // appending each row into calendar body.
+		}
+	})
+}
+
+function next(btn) {
+	var card = btn.closest('.xen-card');
+	var currentYear = parseInt($(card).find('.xen-calendar-year').val());
+	var currentMonth = parseInt($(card).find('.xen-calendar-month').val());
+	var input = $(card).prev();
+	
+	currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+	currentMonth = (currentMonth + 1) % 12;
+	
+	showCalendar(input, currentMonth, currentYear);
+}
+
+function previous(btn) {
+	var card = btn.closest('.xen-card');
+	var currentYear = parseInt($(card).find('.xen-calendar-year').val());
+	var currentMonth = parseInt($(card).find('.xen-calendar-month').val());
+	var input = $(card).prev();
+
+	currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+	currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+
+	showCalendar(input, currentMonth, currentYear);
+}
+
+function jump(select) {
+	var card = select.closest('.xen-card');
+	var currentYear = parseInt($(card).find('.xen-calendar-year').val());
+	var currentMonth = parseInt($(card).find('.xen-calendar-month').val());
+	var input = $(card).prev();
+
+	showCalendar(input, currentMonth, currentYear);
 }
 
 $(document).on('click', '.xen-calendar', function() {

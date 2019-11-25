@@ -1,4 +1,4 @@
-#INSTALLATION
+# INSTALLATION
 
 - Add jquery.js
 - Add nepdatepicker.min.js 

@@ -120,6 +120,7 @@ $(document).on('click', '.xen-cell', function() {
 
 	var currentDate = englishText($(this).html());
 	currentDate = ('0' + currentDate).slice(-2);
+	
 	var showMonth = currentMonth + 1;
 	showMonth = ('0' + showMonth).slice(-2);
 
@@ -141,7 +142,7 @@ let calendars = [];
 
 function init(input) {
 	input.addClass('xen-calendar');
-	var appendData = '<div class="xen-card"><div class="xen-card-header"><div class="xen-form-wrapper"><form class="xen-form-inline"><select class="xen-calendar-month" name="month" id="month" onchange="jump(this)"><option value=0>बैशाख</option><option value=1>जेठ</option><option value=2>असार</option><option value=3>श्रावण</option><option value=4>भदौ</option><option value=5>आश्विन</option><option value=6>कार्तिक</option><option value=7>मंसिर</option><option value=8>पुष</option><option value=9>माघ</option><option value=10>फाल्गुन</option><option value=11>चैत्र</option></select><label for="year"></label><select class="col-sm-6 xen-calendar-year" name="year" id="year" onchange="jump(this)">';
+	var appendData = '<div class="xen-card"><div class="xen-card-header"><div class="xen-form-wrapper"><form class="xen-form-inline"><select class="xen-calendar-month" name="month" id="month" onchange="jump(this)"><option value=0>बैशाख</option><option value=1>जेठ</option><option value=2>असार</option><option value=3>श्रावण</option><option value=4>भदौ</option><option value=5>आश्विन</option><option value=6>कार्तिक</option><option value=7>मंसिर</option><option value=8>पुष</option><option value=9>माघ</option><option value=10>फाल्गुन</option><option value=11>चैत्र</option></select><select class="xen-calendar-year" name="year" id="year" onchange="jump(this)">';
 	for (var i = 2000; i < 2091; i++) {
 		appendData+= '<option value="'+ i +'">'+i+'</option>';
 	}
@@ -152,10 +153,13 @@ function init(input) {
 }
 
 function showCalendar(input, month, year) {
-	// let firstDay = (new Date(year, month)).getDay();
+	if(typeof nepali_dates[year] == 'undefined') {
+		return false;
+	}
+
 	let firstDay = nepali_dates[year][1][month] - 1;
 
-    // tbl = document.querySelector(".calendar-body"); // body of the calendar
+    // body of the calendar
     tbl = input.next('.xen-card').find(".calendar-body")
     // clearing all previous cells
     tbl.html('');

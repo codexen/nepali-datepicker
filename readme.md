@@ -1,5 +1,6 @@
-#TODO
+#INSTALLATION
 
-- multiple instance months change fix
-- fix month change
-- add styles
+- Add jquery.js
+- Add nepdatepicker.min.js 
+- Add nepdatepicker.min.css 
+- $('.classname').nepdatepicker();

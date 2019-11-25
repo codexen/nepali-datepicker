@@ -3,31 +3,31 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Nepali Calendar</title>
-
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./styles.css">
+	
+	<link rel="stylesheet" href="./css/nepdatepicker.min.css">
 </head>
 <body class="container">
 	<div class="row mt-3">
 		<div class="col-md-6">
 			<div class="form-group">
-				<input type="text" class="form-control xen-one form-control">
+				<input type="text" class="form-control form-input-date">
 			</div>
 		</div>
 
 		<div class="col-md-6">
 			<div class="form-group">
-				<input type="text" class="form-control xen-one form-control">
+				<input type="text" class="form-control form-input-date">
 			</div>
 		</div>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-	<script src="./jquery.nepdatepicker.js"></script>
+	<script src="./js/nepdatepicker.min.js"></script>
 	<script>
-		$('.xen-one').nepdatepicker();
-		// $('.xen-two').nepdatepicker();
+		$('.form-input-date').nepdatepicker();
 	</script>
 </body>
 </html>
